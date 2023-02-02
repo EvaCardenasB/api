@@ -25,4 +25,8 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
+<<<<<<< HEAD
           tags: evacardenas/api:latest , evacardenas/api:${{github.event.pull_request.title}}
+=======
+          tags: evacardenas/api:latest , evacardenas/api:${{github.event.pull_request.title}}
+>>>>>>> fa1fee9199bb7f7e8cb93e741c12988ea5e7c645
