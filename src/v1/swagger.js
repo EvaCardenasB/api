@@ -137,6 +137,56 @@ const options =
                         }
                     }
                 },
+                put: {
+                    summary: "Update a songs from the system",
+                    tags: [
+                        "songs"
+                    ],
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            description: "ID of song to fetch",
+                            required: true,
+                            type: "integer",
+                            format: "int64"
+                        },
+                        {
+                            name: "name",
+                            in: "path",
+                            description: "Name of song to fetch",
+                            required: true,
+                            type: "string",
+                        },
+                        {
+                            name: "artist",
+                            in: "path",
+                            description: "Artist of song to fetch",
+                            required: true,
+                            type: "string",
+                        }
+                    ],
+                    responses: {
+                        200: {
+                            description: "",
+                            content: {
+                                "application/json": {
+                                    schema: {
+                                        type: "object",
+                                        properties: {
+                                            name: {
+                                                type: "string"
+
+                                            }
+                                        }, example: {
+                                            "name": "Imagine"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 delete: {
                     summary: "Deletes a songs from the system",
                     tags: [
