@@ -18,7 +18,7 @@ router.get('/:id', function (req, res) {
     var nombre = films.get(req.params.id);
 
     if (nombre == null) {
-        res.json({ message: "No existe la cancion con id " + req.params.id});
+        res.json({ message: "No existe la pelicula con id " + req.params.id});
     }
     else {
         res.json({ name: nombre })
