@@ -5,7 +5,7 @@ const v1Films = require('./v1/routes/films');
 const {swaggerDocs: V1SwaggerDocs} = require('./v1/swagger');
 
 const app = express();  
-const port = process.env.PORT || 4000;  // establecemos nuestro puerto
+const port = process.env.PORT || 4000;  // establecemos el puerto
  
 app.use(express.json());
 
