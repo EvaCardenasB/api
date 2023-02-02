@@ -158,7 +158,7 @@ const options =
                     },
                 },
                 put: {
-                    summary: 'Update a fruit from the system',
+                    summary: 'Update a songs from the system',
                     tags: ['songs'],
                     parameters: [
                         {
@@ -234,6 +234,242 @@ const options =
                             name: "id",
                             in: "path",
                             description: "ID of songs to delete",
+                            required: true,
+                            type: "integer",
+                            format: "int64"
+                        }
+                    ],
+                    responses: {
+                        200: {
+                            description: "",
+                            content: {
+                                "application/json": {
+                                    schema: {
+                                        type: "object",
+                                        properties: {
+                                            message: {
+                                                type: "string"
+                                            }
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+
+            },
+            "/api/v1/films": {
+                get: {
+                    summary: "Returns all films from the system that the user has access to",
+                    tags: [
+                        "films"
+                    ],
+                    responses: {
+                        200: {
+                            description: "A list of songs.",
+                            content: {
+                                "application/json": {
+                                    schema: {
+                                        type: "array",
+                                        items: {
+                                            type: "object",
+                                            properties: {
+                                                id: {
+                                                    type: "integer",
+                                                    format: "int64"
+                                                },
+                                                name: {
+                                                    type: "string"
+                                                },
+                                                year: {
+                                                    type: "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                },
+                post: {
+                    summary: 'Save a films in the system',
+                    tags: ['films'],
+                    requestBody: {
+                        description: 'A films to create',
+                        required: true,
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    type: 'object',
+                                    properties: {
+                                        nombre: {
+                                            type: 'string',
+                                        },
+                                        year: {
+                                            type: 'string',
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                    responses: {
+                        '200': {
+                            description: 'A list of films.',
+                            content: {
+                                'application/json': {
+                                    schema: {
+                                        type: 'array',
+                                        items: {
+                                            type: 'object',
+                                            properties: {
+                                                id: {
+                                                    type: 'integer',
+                                                    format: 'int64',
+                                                },
+                                                name: {
+                                                    type: 'string',
+                                                },
+                                                year: {
+                                                    type: 'string',
+                                                },
+                                            },
+                                            example: {
+                                                id: 1,
+                                                nombre: 'Like a Rolling Stone',
+                                                year: 'Bob Dylan'
+                                            },
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+            "/api/v1/films/{id}": {
+                get: {
+                    summary: "Returns a films from the system that the user has access to",
+                    tags: [
+                        "films"
+                    ],
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            description: "ID of films to fetch",
+                            required: true,
+                            type: "integer",
+                            format: "int64"
+                        }
+                    ],
+                    responses: {
+                        200: {
+                            description: "",
+                            content: {
+                                "application/json": {
+                                    schema: {
+                                        type: "object",
+                                        properties: {
+                                            name: {
+                                                type: "string"
+
+                                            },
+                                            year: {
+                                                type: "string"
+
+                                            },
+                                        }, example: {
+                                            id: 1,
+                                            name: 'Like a Rolling Stone',
+                                            year: 'Bob Dylan'
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                put: {
+                    summary: 'Update a films from the system',
+                    tags: ['films'],
+                    parameters: [
+                        {
+                            name: 'id',
+                            in: 'path',
+                            description: 'ID of films to update',
+                            required: true,
+                            schema: {
+                                type: 'integer',
+                                format: 'int64',
+                            },
+                        },
+                    ],
+                    requestBody: {
+                        description: 'A films to update',
+                        required: true,
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    type: 'object',
+                                    properties: {
+                                        name: {
+                                            type: 'string',
+                                        },
+                                        year: {
+                                            type: 'string',
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                    responses: {
+                        '200': {
+                            description: 'A list of films.',
+                            content: {
+                                'application/json': {
+                                    schema: {
+                                        type: 'array',
+                                        items: {
+                                            type: 'object',
+                                            properties: {
+                                                id: {
+                                                    type: 'integer',
+                                                    format: 'int64',
+                                                },
+                                                name: {
+                                                    type: 'string',
+                                                },
+                                                year: {
+                                                    type: 'string',
+                                                },
+                                            },
+                                            example: {
+                                                id: 1,
+                                                nombre: 'Like a Rolling Stone',
+                                                year: 'Bob Dylan'
+                                            },
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                delete: {
+                    summary: "Deletes a films from the system",
+                    tags: [
+                        "films"
+                    ],
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            description: "ID of films to delete",
                             required: true,
                             type: "integer",
                             format: "int64"

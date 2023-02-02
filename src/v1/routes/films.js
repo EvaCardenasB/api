@@ -1,17 +1,14 @@
 var router = require('express').Router();
 const films = new Map();
 
-films.set("1", "Like a Rolling Stone", "Bob Dylan");
-films.set("2", "Satisfaction", "The Rolling Stones");
-films.set("3", "Imagine", "John Lennon");
-films.set("4", "What's Going On", "Marvin Gaye");
-films.set("5", "Respect", "Aretha Franklin");
-films.set("6", "Good Vibrations", "	Beach Boys");
-films.set("7", "Johnny B. Goode", "Chuck Berry");
-films.set("8", "Hey Jude", "The Beatles");
-films.set("9", "Smells Like Teen Spirit", "Nirvana");
-films.set("10", "What'd I Say", "	Ray Charles");
-
+films.set("1", "Stalker", "1979");
+films.set("2", "Seven ", "1995");
+films.set("3", "La milla verde", "1999");
+films.set("4", "Persona", "1966");
+films.set("5", "Parásitos ", "2019");
+films.set("6", "El viaje de Chihiro", "2001");
+films.set("7", "Coco", "2017");
+films.set("8", "Interstellar", "2014");
 
 //funciones
 router.get('/:id', function (req, res) {
@@ -26,24 +23,39 @@ router.get('/:id', function (req, res) {
 })
 
 router.get('/', function (req, res) {
-    array = Array.from(films, ([id, name, artist]) => ({ id, name, artist }));
+    array = Array.from(films, ([id, name, year]) => ({ id, name, year }));
     console.log(array);
     res.json(array)
 })
 
 router.post('/', function (req, res) {
-    res.json({ message: 'Vas a añadir un registro' })
+    let {id} = films.size+1
+    let {name, year} = req.body
+    if(name && year) {
+        films.set(id,name,year);
+        res.json({ message: 'Has añadido un registro' })
+    } else {
+        res.status(500).json('La pelicula no se ha actualizó')
+    }
 })
 
 router.put('/:id', function (req, res) {
-    res.json({ message: 'Vas a actualizar el registro con id ' + req.params.id })
+    let {id} = req.params
+    let {name, year} = req.body
+    if(name && year) {
+        films.set(id,name,year);
+        res.json({ message: 'Has actualizado el registro con id ' + id})
+
+    } else {
+        res.status(500).json('La pelicula no se ha actualizó')
+    }
 })
 
 router.delete('/:id', function (req, res) {
     if(!films.delete(req.params.id)){
         res.json({ message: 'El resgitro con id ' + req.params.id +' no existe' })
     }else{
-        res.json({ message: 'Vas a borrar el registro con id ' + req.params.id + 'name: '+ films.get(req.params.id)})
+        res.json({ message: 'Has borrado el registro con id ' + req.params.id })
 
     }
     

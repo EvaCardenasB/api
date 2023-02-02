@@ -58,7 +58,7 @@ router.delete('/:id', function (req, res) {
     if(!songs.delete(req.params.id)){
         res.json({ message: 'El resgitro con id ' + req.params.id +' no existe' })
     }else{
-        res.json({ message: 'Vas a borrar el registro con id ' + req.params.id })
+        res.json({ message: 'Has borrado el registro con id ' + req.params.id })
 
     }
     
