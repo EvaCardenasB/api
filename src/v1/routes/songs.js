@@ -32,12 +32,26 @@ router.get('/', function (req, res) {
 })
 
 router.post('/', function (req, res) {
-    songs.set(songs.size+1,req.params.name,req.params.artist)
-    res.json({ message: 'Vas a añadir un registro' })
+    let {id} = songs.size+1
+    let {name, artist} = req.body
+    if(name && artist) {
+        songs.set(id,name,artist);
+        res.json({ message: 'Vas a añadir un registro' })
+    } else {
+        res.status(500).json('La cancion no se ha actualizó')
+    }
 })
 
 router.put('/:id', function (req, res) {
-    res.json({ message: 'Vas a actualizar el registro con id ' + req.params.id })
+    let {id} = req.params
+    let {name, artist} = req.body
+    if(name && artist) {
+        songs.set(id,name,artist);
+        res.json({ message: 'Has actualizado el registro con id ' + id})
+
+    } else {
+        res.status(500).json('La cancion no se ha actualizó')
+    }
 })
 
 router.delete('/:id', function (req, res) {

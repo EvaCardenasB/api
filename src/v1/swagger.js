@@ -59,46 +59,60 @@ const options =
                     }
                 },
                 post: {
-                    summary: "Add a songs from the system",
-                    tags: [
-                        "songs"
-                    ],
-                    parameters: [
-                        {
-                            name: "name",
-                            in: "path",
-                            description: "Name of songs",
-                            required: true,
-                            type: "string"
-                            
+                    summary: 'Save a song in the system',
+                    tags: ['songs'],
+                    requestBody: {
+                        description: 'A song to create',
+                        required: true,
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    type: 'object',
+                                    properties: {
+                                        nombre: {
+                                            type: 'string',
+                                        },
+                                        artist: {
+                                            type: 'string',
+                                        },
+                                    },
+                                },
+                            },
                         },
-                        {
-                            name: "artist",
-                            in: "path",
-                            description: "Artist of songs",
-                            required: true,
-                            type: "string"
-                            
-                        }
-                    ],
+                    },
                     responses: {
-                        200: {
-                            description: "",
+                        '200': {
+                            description: 'A list of songs.',
                             content: {
-                                "application/json": {
+                                'application/json': {
                                     schema: {
-                                        type: "object",
-                                        properties: {
-                                            message: {
-                                                type: "string"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                                        type: 'array',
+                                        items: {
+                                            type: 'object',
+                                            properties: {
+                                                id: {
+                                                    type: 'integer',
+                                                    format: 'int64',
+                                                },
+                                                name: {
+                                                    type: 'string',
+                                                },
+                                                artist: {
+                                                    type: 'string',
+                                                },
+                                            },
+                                            example: {
+                                                id: 1,
+                                                nombre: 'Like a Rolling Stone',
+                                                artist: 'Bob Dylan'
+                                            },
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
             },
             "/api/v1/songs/{id}": {
                 get: {
@@ -127,65 +141,88 @@ const options =
                                             name: {
                                                 type: "string"
 
-                                            }
-                                        }, example: {
-                                            "name": "Imagine"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                put: {
-                    summary: "Update a songs from the system",
-                    tags: [
-                        "songs"
-                    ],
-                    parameters: [
-                        {
-                            name: "id",
-                            in: "path",
-                            description: "ID of song to fetch",
-                            required: true,
-                            type: "integer",
-                            format: "int64"
-                        },
-                        {
-                            name: "name",
-                            in: "path",
-                            description: "Name of song to fetch",
-                            required: true,
-                            type: "string",
-                        },
-                        {
-                            name: "artist",
-                            in: "path",
-                            description: "Artist of song to fetch",
-                            required: true,
-                            type: "string",
-                        }
-                    ],
-                    responses: {
-                        200: {
-                            description: "",
-                            content: {
-                                "application/json": {
-                                    schema: {
-                                        type: "object",
-                                        properties: {
-                                            name: {
+                                            },
+                                            artist: {
                                                 type: "string"
 
-                                            }
+                                            },
                                         }, example: {
-                                            "name": "Imagine"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                                            id: 1,
+                                            nombre: 'Like a Rolling Stone',
+                                            artist: 'Bob Dylan'
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                put: {
+                    summary: 'Update a fruit from the system',
+                    tags: ['songs'],
+                    parameters: [
+                        {
+                            name: 'id',
+                            in: 'path',
+                            description: 'ID of song to update',
+                            required: true,
+                            schema: {
+                                type: 'integer',
+                                format: 'int64',
+                            },
+                        },
+                    ],
+                    requestBody: {
+                        description: 'A song to update',
+                        required: true,
+                        content: {
+                            'application/json': {
+                                schema: {
+                                    type: 'object',
+                                    properties: {
+                                        name: {
+                                            type: 'string',
+                                        },
+                                        artist: {
+                                            type: 'string',
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                    responses: {
+                        '200': {
+                            description: 'A list of songs.',
+                            content: {
+                                'application/json': {
+                                    schema: {
+                                        type: 'array',
+                                        items: {
+                                            type: 'object',
+                                            properties: {
+                                                id: {
+                                                    type: 'integer',
+                                                    format: 'int64',
+                                                },
+                                                name: {
+                                                    type: 'string',
+                                                },
+                                                artist: {
+                                                    type: 'string',
+                                                },
+                                            },
+                                            example: {
+                                                id: 1,
+                                                nombre: 'Like a Rolling Stone',
+                                                artist: 'Bob Dylan'
+                                            },
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
                 },
                 delete: {
                     summary: "Deletes a songs from the system",
@@ -213,18 +250,17 @@ const options =
                                             message: {
                                                 type: "string"
                                             }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+
             },
         },
     },
-    // apis: [path.join(__dirname, './routes/*.js')]
     apis: ["src/v1/routes/songs.js", "src/v1/routes/films.js"],
 
 };
